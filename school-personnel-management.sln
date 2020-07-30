@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "school-personnel-management", "school-personnel-management\school-personnel-management.csproj", "{12B9921F-4015-4D1B-BBCE-E86CF3FA7DA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Personnel.Management", "school-personnel-management\School.Personnel.Management.csproj", "{12B9921F-4015-4D1B-BBCE-E86CF3FA7DA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
