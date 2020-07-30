@@ -98,7 +98,7 @@ namespace school_personnel_management
             var upgraderTran = DeployChanges.To
                 .SqlDatabase(connString)
                 .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly(),
-                    name => name.StartsWith("School.Personnel.Service.Scripts"))
+                    name => name.StartsWith("School.Personnel.Management.Scripts"))
                 .LogToConsole()
                 .Build();
 

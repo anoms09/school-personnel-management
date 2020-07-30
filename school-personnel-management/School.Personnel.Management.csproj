@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\1596122493_personnel_db_initialization.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1596122493_personnel_db_initialization.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Staff\" />
     <Folder Include="Models\Students\" />
     <Folder Include="wwwroot\" />
