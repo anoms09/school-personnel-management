@@ -144,6 +144,8 @@ CREATE TABLE [dbo].[tbl_staff_roles](
 	[role_description] varchar (250)NULL,
 	[faculty_code] varchar (30) NOT NULL,
 	[dept_code] varchar (30) NOT NULL,
+	[has_max_number] bit default(0),
+	[max_number] int NULL,
 	[role_manager_staff_number] varchar (50) NULL,
 	[created_at] [datetime] default(getdate()),
 	[last_updated] [datetime] default(getdate())
@@ -174,6 +176,30 @@ CREATE TABLE [dbo].[tbl_department](
 	[faculty_code] varchar (30) NOT NULL,
 	[created_at] [datetime] default(getdate()),
 	[last_updated] [datetime] default(getdate())
+) ON [PRIMARY]
+end
+go
+
+IF OBJECT_ID('tbl_app_permissions','U') IS NULL 
+begin
+CREATE TABLE [dbo].[tbl_app_permissions](
+	[id] bigint NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[permission_name] varchar (50)NOT NULL,
+	[permission_description] varchar (250)NULL,
+	[is_app_admin_role] bit default(0),
+	[created_at] [datetime] default(getdate()),
+	[last_updated] [datetime] default(getdate())
+) ON [PRIMARY]
+end
+go
+
+IF OBJECT_ID('tbl_role_permissions','U') IS NULL 
+begin
+CREATE TABLE [dbo].[tbl_role_permissions](
+	[id] bigint NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[role_id] bigint NOT NULL,
+	[permission_id] varchar (250)NULL,
+	[created_at] [datetime] default(getdate()),
 ) ON [PRIMARY]
 end
 go

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using School.Personnel.Management.Interfaces;
+using School.Personnel.Management.Repositories.AppAdmin;
 using School.Personnel.Management.Util;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -56,6 +57,7 @@ namespace school_personnel_management
 
         private void SetupDependencies(IServiceCollection services)
         {
+            services.AddTransient<PermissionRepository>();            
             services.AddSingleton<IAppConfiguration, AppConfiguration>();            
             PerformScriptUpdate();
         }
