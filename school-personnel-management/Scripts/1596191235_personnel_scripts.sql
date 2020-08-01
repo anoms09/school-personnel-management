@@ -99,13 +99,13 @@ GO
 
 IF (OBJECT_ID('usp_update_faculty_by_id_code') is not null)
 BEGIN
-	drop procedure usp_update_faculty_by_id;
+	drop procedure usp_update_faculty_by_id_code;
 END
 GO
 
-IF (OBJECT_ID('usp_update_faculty_by_code') is not null)
+IF (OBJECT_ID('usp_get_faculty_by_code') is not null)
 BEGIN
-	drop procedure usp_update_faculty_by_code;
+	drop procedure usp_get_faculty_by_code;
 END
 GO
 
@@ -126,7 +126,7 @@ create procedure usp_update_faculty_by_id_code
 	@faculty_code varchar(30)
 as
 
-update tbl_faculty set faculty_name = @faculty_name , faculty_description =@faculty_description
+update tbl_faculty set faculty_name = @faculty_name , faculty_description =@faculty_description, last_updated = getdate()
 where id = @id and  faculty_code = @faculty_code
 GO
 
@@ -169,5 +169,100 @@ create procedure usp_get_faculty_by_code
 	@code varchar(30)
 as
 SELECT Top 1 * FROM tbl_faculty where faculty_code = @code;
+GO
+
+IF (OBJECT_ID('usp_create_department') is not null)
+BEGIN
+	drop procedure usp_create_department;
+END
+GO
+
+IF (OBJECT_ID('usp_search_department') is not null)
+BEGIN
+	drop procedure usp_search_department;
+END
+GO
+
+IF (OBJECT_ID('usp_get_department_by_id') is not null)
+BEGIN
+	drop procedure usp_get_department_by_id;
+END
+GO
+
+IF (OBJECT_ID('usp_update_department_by_id_code') is not null)
+BEGIN
+	drop procedure usp_update_department_by_id_code;
+END
+GO
+
+IF (OBJECT_ID('usp_get_department_by_code') is not null)
+BEGIN
+	drop procedure usp_get_department_by_code;
+END
+GO
+
+create procedure usp_create_department
+	@dept_name varchar (50),
+	@dept_description text,
+	@dept_code varchar(30),
+	@faculty_code varchar(30)
+as
+
+insert into tbl_department (dept_name, dept_description, dept_code, faculty_code)
+values (@dept_name, @dept_description,@dept_code, @faculty_code) SELECT SCOPE_IDENTITY();
+GO
+
+create procedure usp_update_department_by_id_code
+	@id bigint,
+	@dept_name varchar (50),
+	@dept_description text,
+	@dept_code varchar(30),
+	@faculty_code varchar(30)
+as
+
+update tbl_department set dept_name = @dept_name , dept_description =@dept_description, faculty_code =@faculty_code, last_updated = getdate()
+where id = @id and  dept_code = @dept_code
+GO
+
+create procedure usp_search_department
+@pageNumber int = 1,
+@pageSize int,
+@search_text varchar(50) = null
+as
+declare @from_row int = 1;
+
+if @pageNumber > 1
+begin
+	set @from_row = ((@pageNumber * @pagesize) - (@pagesize)) + 1;
+end;
+
+with records as
+(
+select *,ROW_NUMBER()  over(order by created_at desc) as Row_Num from tbl_department (nolock)
+
+where ((@search_text is null)
+ or (dept_name like '%' + @search_text+ '%')
+  or (dept_description like '%'+ @search_text+ '%')
+  or (dept_code like '%'+ @search_text+ '%')
+  or (faculty_code like '%'+ @search_text+ '%')
+ ) 
+),
+rec_count as
+(
+	select count(*) totalcount from records
+)
+select * from records,rec_count where Row_Num between @from_row and (@from_row + @pagesize -1) order by created_at  desc 
+GO
+
+create procedure usp_get_department_by_id
+	@id bigint
+as
+SELECT Top 1 * FROM tbl_department where id = @id;
+GO
+
+create procedure usp_get_department_by_code
+	@code varchar(30)
+as
+SELECT Top 1 * FROM tbl_department where dept_code = @code;
 GO
 

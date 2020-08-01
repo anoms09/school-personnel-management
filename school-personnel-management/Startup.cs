@@ -60,6 +60,7 @@ namespace school_personnel_management
         private void SetupDependencies(IServiceCollection services)
         {
             services.AddTransient<PermissionRepository>();      
+            services.AddTransient<DepartmentRepository>();      
             services.AddTransient<FacultyRepository>();            
             services.AddSingleton<IAppConfiguration, AppConfiguration>();            
             PerformScriptUpdate();
