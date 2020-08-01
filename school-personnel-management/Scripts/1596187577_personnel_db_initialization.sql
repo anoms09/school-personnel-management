@@ -157,8 +157,8 @@ IF OBJECT_ID('tbl_faculty','U') IS NULL
 begin
 CREATE TABLE [dbo].[tbl_faculty](
 	[id] bigint NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	[name] varchar (50)NOT NULL,
-	[description] Text NULL,
+	[faculty_name] varchar (50)NOT NULL,
+	[faculty_description] Text NULL,
 	[faculty_code] varchar (30) UNIQUE NOT NULL,
 	[created_at] [datetime] default(getdate()),
 	[last_updated] [datetime] default(getdate())
@@ -170,8 +170,8 @@ IF OBJECT_ID('tbl_department','U') IS NULL
 begin
 CREATE TABLE [dbo].[tbl_department](
 	[id] bigint NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	[name] varchar (50)NOT NULL,
-	[description] Text NULL,
+	[dept_name] varchar (50)NOT NULL,
+	[dept_description] Text NULL,
 	[dept_code] varchar (30) UNIQUE NOT NULL,
 	[faculty_code] varchar (30) NOT NULL,
 	[created_at] [datetime] default(getdate()),

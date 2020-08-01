@@ -67,7 +67,7 @@ namespace School.Personnel.Management.Controllers.AppAdmin
         }
 
         // GET: api/Permissions/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetPermissionById(long id)
         {
             try

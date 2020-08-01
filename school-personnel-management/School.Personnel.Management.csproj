@@ -5,19 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\1596187576_personnel_db_initialization.sql" />
-    <None Remove="Scripts\1596191220_personnel_scripts.sql" />
+    <None Remove="Scripts\1596187577_personnel_db_initialization.sql" />
+    <None Remove="Scripts\1596191221_personnel_scripts.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\1596187576_personnel_db_initialization.sql" />
-    <EmbeddedResource Include="Scripts\1596191220_personnel_scripts.sql" />
+    <EmbeddedResource Include="Scripts\1596187577_personnel_db_initialization.sql" />
+    <EmbeddedResource Include="Scripts\1596191221_personnel_scripts.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\Student\" />
-    <Folder Include="Controllers\Staff\" />
-    <Folder Include="Models\Staff\" />
     <Folder Include="Models\Students\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
